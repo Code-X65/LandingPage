@@ -8,6 +8,9 @@ import LandingPage5 from './Pages/LandingPage5.jsx'
 import LandingPage6 from './Pages/LandnigPage6.jsx'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Homepage from './Pages/Homepage.jsx'
+import LandingPage7 from './Pages/LandingPage7.jsx'
+import LandingPage8 from './Pages/LandingPage8.jsx'
+import LandingPage9 from './Pages/LandingPage9.jsx'
 const App = () => {
   return (
     <>
@@ -25,6 +28,10 @@ const App = () => {
           <Route path='/landing1/preview1' element={<LandingPage4 />} />
           <Route path='/landing1/preview2' element={<LandingPage5 />} />
           <Route path='/landing1/preview3' element={<LandingPage6 />} />
+
+          <Route path='/landing3/preview1' element={<LandingPage7 />} />
+          <Route path='/landing3/preview2' element={<LandingPage8 />} />
+          <Route path='/landing3/preview3' element={<LandingPage9 />} />
         </Routes>
       </Router>
     </div>
