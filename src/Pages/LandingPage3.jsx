@@ -183,7 +183,7 @@ const LandingPage3 = () => {
                 {/* Header */}
                 <header className="fixed top-0 left-0 right-0 z-50 p-4 md:px-8 backdrop-blur-md bg-black/80 flex justify-between items-center shadow-2xl shadow-purple-900/50 rounded-b-2xl border-b border-purple-800">
                     <div className="text-3xl font-extrabold text-white tracking-widest">
-                        DELACRUZ<span className={`text-${PRIMARY_PURPLE_CLASS}`}>.DEV</span>
+                        DELACRUZ
                     </div>
                     <a 
                         href="#cta-section" 

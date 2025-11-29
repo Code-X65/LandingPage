@@ -40,7 +40,7 @@ const Homepage = () => {
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-8">
       <div className="max-w-7xl w-full">
-        <h1 className='text-white text-center text-2xl'>Good Morning Boss</h1>
+        <h1 className='text-white text-center text-2xl uppercase'>It a Really sunny afternoon sir</h1>
         <h1 className="text-5xl font-bold text-white text-center mb-16 bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
        Please kindly select a landing page to preview
         </h1>
