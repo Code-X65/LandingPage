@@ -13,9 +13,9 @@ const App = () => {
     <>
     <div>
       {/* <Navbar /> */}
-      <Router>
+      <Router basename='/LandingPage/'>
         <Routes>
-         <Route path='/' element={<Homepage />} />
+         <Route index element={<Homepage />} />
           <Route path='/landing2/preview1' element={<LandingPage1 />} />
           <Route path='/landing2/preview2' element={<LandingPage2 />} />
           <Route path='/landing2/preview3' element={<LandingPage3 />} />
