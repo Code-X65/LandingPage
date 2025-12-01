@@ -21,16 +21,19 @@ const App = () => {
          <Route index element={<Homepage />} />
           <Route path='/landing2/preview1' element={<LandingPage1 />} />
           <Route path='/landing2/preview2' element={<LandingPage2 />} />
+          {/* Selected */}
           <Route path='/landing2/preview3' element={<LandingPage3 />} />
 
 
           {/* Landing PAge 1 */}
           <Route path='/landing1/preview1' element={<LandingPage4 />} />
+          {/* Selected */}
           <Route path='/landing1/preview2' element={<LandingPage5 />} />
           <Route path='/landing1/preview3' element={<LandingPage6 />} />
 
           <Route path='/landing3/preview1' element={<LandingPage7 />} />
           <Route path='/landing3/preview2' element={<LandingPage8 />} />
+          {/* Selected */}
           <Route path='/landing3/preview3' element={<LandingPage9 />} />
         </Routes>
       </Router>

@@ -1,8 +1,9 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { Mail, Clock, Zap, DollarSign, Send, CheckCircle } from 'lucide-react';
+import { Mail, Clock, Zap, DollarSign, Send, CheckCircle, ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import * as THREE from 'three';
+
 // ====================================================================
-// Custom WhatsApp Icon Component (Fixes the import error)
+// Custom WhatsApp Icon Component
 // ====================================================================
 
 const Whatsapp = (props) => (
@@ -12,13 +13,12 @@ const Whatsapp = (props) => (
         viewBox="0 0 24 24" 
         fill="currentColor"
     >
-        <path d="M12 2C6.48 2 2 6.48 2 12c0 3.32 1.6 6.22 4.07 7.92L4 22l2.31-.69c.5.15 1.02.25 1.55.25C14.02 21.5 22 17.15 22 12 22 6.48 17.52 2 12 2zM17.43 14.82c-.1-.17-.4-.27-.85-.45s-2.61-1.29-3.02-1.42c-.41-.13-.7-.2-.99.2c-.29.41-.38 1-.19 1.41.19.41.87 1.03.94 1.11.07.08.14.18.04.37-.1.19-.3.26-.59.38-.29.12-1.35.53-2.57.98-.94.35-1.55.51-2.07.49-.52-.02-1.22-.19-1.57-.33-.35-.14-.7-.2-.96-.2C6.39 15 6 15.19 6 15.54c0 .35.35.79.45.91.1.12.23.28.37.45.14.17.4.4.87.6.47.2 1.05.47 1.7.72.65.25 1.35.43 2.05.58 1.06.22 2.08.19 2.87.12.8-.07 1.88-.77 2.14-1.56.26-.79.26-1.45.18-1.56-.08-.11-.27-.18-.57-.33z"/>
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
     </svg>
 );
 
-
 // ====================================================================
-// 1. UTILITY: SCROLL DIRECTION & PULSE HOOK (The "Gasp" Animation)
+// 1. UTILITY: SCROLL DIRECTION & PULSE HOOK
 // ====================================================================
 
 const useScrollDirection = () => {
@@ -30,19 +30,18 @@ const useScrollDirection = () => {
   const updateScrollDir = useCallback(() => {
     const scrollY = window.scrollY;
 
-    if (Math.abs(scrollY - lastScrollY.current) > 20) { // Threshold to prevent flickering
+    if (Math.abs(scrollY - lastScrollY.current) > 20) {
       const newDir = scrollY > lastScrollY.current ? "down" : "up";
       if (newDir !== scrollDir) {
         setScrollDir(newDir);
         setIsPulsing(true);
         
-        // Clear previous timeout and set a new one for the 'gasp' duration
         if (pulseTimeout.current) {
           clearTimeout(pulseTimeout.current);
         }
         pulseTimeout.current = setTimeout(() => {
           setIsPulsing(false);
-        }, 150); // Matches the CSS transition duration
+        }, 150);
       }
       lastScrollY.current = scrollY > 0 ? scrollY : 0;
     }
@@ -63,13 +62,8 @@ const useScrollDirection = () => {
 
 // ====================================================================
 // 2. HERO COMPONENT: THREE.JS INTEGRATION
-// (Requires THREE library to be available in the environment)
 // ====================================================================
 
-/**
- * Renders a simple 3D abstract object using Three.js for a dynamic hero background.
- * Assumes THREE is available globally.
- */
 const ThreeJsHero = () => {
     const mountRef = useRef(null);
     
@@ -80,23 +74,18 @@ const ThreeJsHero = () => {
         const currentMount = mountRef.current;
         if (!currentMount) return;
 
-        // Scene setup
         scene = new THREE.Scene();
-        
-        // Camera setup
         camera = new THREE.PerspectiveCamera(75, currentMount.clientWidth / currentMount.clientHeight, 0.1, 1000);
         camera.position.z = 5;
 
-        // Renderer setup
         renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
-        renderer.setClearColor(0x000000, 0); // Transparent background
+        renderer.setClearColor(0x000000, 0);
         currentMount.appendChild(renderer.domElement);
 
-        // Geometry (Torus Knot for abstract look)
         geometry = new THREE.TorusKnotGeometry(1.5, 0.5, 100, 16);
         material = new THREE.MeshPhysicalMaterial({
-            color: 0x9333ea, // Purple
+            color: 0x9333ea,
             metalness: 0.9,
             roughness: 0.1,
             clearcoat: 1.0,
@@ -107,25 +96,20 @@ const ThreeJsHero = () => {
         cube = new THREE.Mesh(geometry, material);
         scene.add(cube);
 
-        // Lighting
-        const pointLight = new THREE.PointLight(0xa855f7, 20); // Bright purple light
+        const pointLight = new THREE.PointLight(0xa855f7, 20);
         pointLight.position.set(5, 5, 5);
         scene.add(pointLight);
 
-        const ambientLight = new THREE.AmbientLight(0x4c1d95, 0.5); // Dark ambient
+        const ambientLight = new THREE.AmbientLight(0x4c1d95, 0.5);
         scene.add(ambientLight);
 
-        // Animation Loop
         const animate = () => {
             animationFrameId = requestAnimationFrame(animate);
-
             cube.rotation.x += 0.005;
             cube.rotation.y += 0.008;
-
             renderer.render(scene, camera);
         };
 
-        // Handle Resize
         const handleResize = () => {
             if (!currentMount) return;
             camera.aspect = currentMount.clientWidth / currentMount.clientHeight;
@@ -136,7 +120,6 @@ const ThreeJsHero = () => {
         window.addEventListener('resize', handleResize);
         animate();
 
-        // Cleanup on unmount
         return () => {
             window.removeEventListener('resize', handleResize);
             cancelAnimationFrame(animationFrameId);
@@ -150,167 +133,217 @@ const ThreeJsHero = () => {
     }, []);
 
     return (
-        <div ref={mountRef} className="absolute inset-0 z-0 opacity-70">
-            {/* Three.js canvas mounts here */}
+        <div ref={mountRef} className="absolute inset-0 z-0 opacity-70" />
+    );
+};
+
+// ====================================================================
+// 3. CAROUSEL COMPONENT
+// ====================================================================
+
+const Carousel = ({ items }) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const next = () => {
+        setCurrentIndex((prev) => (prev + 1) % items.length);
+    };
+
+    const prev = () => {
+        setCurrentIndex((prev) => (prev - 1 + items.length) % items.length);
+    };
+
+    useEffect(() => {
+        const interval = setInterval(next, 5000);
+        return () => clearInterval(interval);
+    }, []);
+
+    const Item = items[currentIndex];
+
+    return (
+        <div className="relative">
+            <div className="p-6 bg-gray-900/70 backdrop-blur-md rounded-xl border border-purple-700/50 shadow-lg min-h-[200px] flex flex-col justify-center">
+                <Item.icon className="w-10 h-10 text-purple-400 mb-4 mx-auto" />
+                <h3 className="text-xl font-semibold text-white mb-2 text-center">{Item.title}</h3>
+                <p className="text-gray-300 text-center text-sm">{Item.description}</p>
+            </div>
+            
+
+
+            <div className="flex justify-center mt-4 gap-2">
+                {items.map((_, idx) => (
+                    <div 
+                        key={idx}
+                        className={`w-2 h-2 rounded-full transition-all ${idx === currentIndex ? 'bg-purple-500 w-6' : 'bg-gray-600'}`}
+                    />
+                ))}
+            </div>
         </div>
     );
 };
 
 // ====================================================================
-// 3. MAIN APP COMPONENT
+// 4. MAIN APP COMPONENT
 // ====================================================================
-
-const Card = ({ icon: Icon, title, description }) => (
-    <div className="p-6 bg-gray-900/70 backdrop-blur-md rounded-xl border border-purple-700/50 shadow-lg transition-all hover:shadow-purple-500/30 hover:scale-[1.02] duration-300">
-        <Icon className="w-8 h-8 text-purple-400 mb-4" />
-        <h3 className="text-xl font-semibold text-white mb-2">{title}</h3>
-        <p className="text-gray-300">{description}</p>
-    </div>
-);
 
 const LandingPage2 = () => {
     const { isPulsing } = useScrollDirection();
-    const apiKey = ""; // API Key placeholder
 
-    // Custom data structure for benefits and CTA
     const benefits = [
-        { icon: CheckCircle, title: "Modern, Responsive Website", description: "Sleek, fast, and gorgeous on all devices (especially mobile for Nigerian users!)." },
-        { icon: Zap, title: "Payment & WhatsApp CRM Integrated", description: "Start taking payments and managing leads instantly with zero friction." },
-        { icon: Clock, title: "Quick 7-Day Turnaround", description: "Stop waiting. We deliver your fully functional system in one week, ready for Detty December sales." },
-        { icon: DollarSign, title: "Revenue Generation Ready", description: "Designed to convert visitors into paying customers immediately upon launch." },
-    ];
-
-    const prices = [
-        { name: "Starter", price: "₦180,000", description: "Perfect for brochure sites and basic lead capture." },
-        { name: "Pro", price: "₦450,000", description: "Includes CRM integration, 5-page setup, and advanced payment gateway." },
-        { name: "Enterprise", price: "₦850,000+", description: "Full custom e-commerce or booking system, advanced analytics, and priority support." },
+        { icon: CheckCircle, title: "Modern Website", description: "Sleek, fast, gorgeous on all devices." },
+        { icon: Zap, title: "Payment & CRM", description: "Take payments & manage leads instantly." },
+        { icon: Clock, title: "7-Day Delivery", description: "Fully functional in one week." },
+        { icon: DollarSign, title: "Revenue Ready", description: "Convert visitors to customers immediately." },
     ];
 
     return (
-        <div className="min-h-screen bg-black text-white font-sans">
-            {/* The main content wrapper applies the "Gasp" effect */}
+        <div className="min-h-screen bg-black text-white font-sans overflow-x-hidden">
+            {/* Fixed WhatsApp Button */}
+            <a 
+                href="https://wa.me/2348012345678"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 p-4 rounded-full shadow-2xl transition-all hover:scale-110 group"
+            >
+                <Whatsapp className="w-7 h-7 text-white" />
+                <span className="absolute bottom-full right-0 mb-2 bg-gray-900 text-white text-xs px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                    Chat with us!
+                </span>
+            </a>
+
             <main
-                className={`max-w-6xl mx-auto py-8 px-4 transition-all duration-150 ease-out 
+                className={`max-w-6xl mx-auto py-4 px-4 transition-all duration-150 ease-out 
                 ${isPulsing ? 'scale-[0.99] blur-[0.5px] brightness-125' : 'scale-100 blur-0 brightness-100'}`}
             >
                 {/* Header */}
-                <header className="py-4 flex justify-between items-center mb-12">
+                <header className="py-3 flex justify-center items-center mb-6">
                     <h1 className="text-2xl font-extrabold text-purple-500 tracking-wider">
                         DELACRUZ
                     </h1>
-                    <nav>
-                        <a href="#cta" className="text-sm font-medium text-white hover:text-purple-400 transition">
-                            Book Slot
-                        </a>
-                    </nav>
                 </header>
 
-                {/* Hero Section */}
-                <section className="relative h-screen flex flex-col justify-center items-center text-center overflow-hidden mb-24">
-                    {/* Three.js Background */}
+                {/* Hero Section - Reduced Height */}
+                <section className="relative h-[70vh] flex flex-col justify-center items-center text-center overflow-hidden mb-12">
                     <ThreeJsHero />
 
-                    <div className="relative z-10 max-w-4xl p-4 md:p-8 bg-black/40 rounded-xl">
-                        <p className="text-sm md:text-md font-semibold tracking-widest uppercase text-purple-400 mb-3">
+                    <div className="relative z-10 max-w-4xl p-4 md:p-6 bg-black/40 rounded-xl mx-2">
+                        <p className="text-xs md:text-sm font-semibold tracking-widest uppercase text-purple-400 mb-2">
                             Website Revamp + Integrated Systems
                         </p>
-                        <h2 className="text-4xl md:text-7xl font-extrabold leading-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-white">
-                            Upgrade Your Website This Detty December  Launch in 7 Days!
+                        <h2 className="text-2xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-3 md:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-white">
+                            Upgrade Your Website This Detty December. <br className="hidden md:block" />
+                            <span className="text-xl md:text-3xl lg:text-4xl">Launch in 7 Days!!</span>
                         </h2>
-                        <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10">
-                            Professional website + payment integration + WhatsApp CRM. Perfect for SMEs ready to boost sales before year-end.
+                        <p className="text-sm md:text-lg text-gray-300 max-w-3xl mx-auto mb-4 md:mb-6">
+                            Professional website + payment + WhatsApp CRM for businesses.
                         </p>
                         
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center" id="cta">
+                        <div className="flex justify-center" id="cta">
                             <a 
                                 href="#cta-form" 
-                                className="px-8 py-3 bg-purple-600 text-white font-bold text-lg rounded-full shadow-2xl shadow-purple-500/50 
-                                           hover:bg-purple-500 transform hover:scale-[1.05] transition-all duration-300 group"
+                                className="px-4 py-2 md:px-6 md:py-3 bg-white text-black font-bold text-sm md:text-base rounded-full shadow-2xl shadow-purple-500/50 
+                                           hover:bg-purple-500 hover:text-white transform hover:scale-105 transition-all duration-300 group whitespace-nowrap"
                             >
-                                <Zap className="w-5 h-5 inline mr-2 group-hover:rotate-6 transition duration-200"/>
-                                Reserve Your December Website Revamp Slot!
-                            </a>
-                            <a 
-                                href="https://wa.me/23480xxxxxxxx?text=I'm%20interested%20in%20the%20Detty%20December%20Revamp%20Offer" 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="px-8 py-3 border border-green-500 text-green-300 font-bold text-lg rounded-full 
-                                           hover:bg-green-900/50 transform hover:scale-[1.05] transition-all duration-300"
-                            >
-                                <Whatsapp className="w-5 h-5 inline mr-2"/>
-                                Instant Chat with Tolu
+                                <Zap className="w-4 h-4 inline mr-1 group-hover:rotate-6 transition duration-200"/>
+                                Reserve Your Slot!
                             </a>
                         </div>
                     </div>
                 </section>
 
-                {/* Urgency/Scarcity Banner */}
-                <section className="bg-red-900/40 border-l-4 border-red-500 p-4 md:p-6 rounded-lg text-center shadow-2xl shadow-red-800/50 mb-24 animate-pulse">
-                    <p className="text-xl md:text-2xl font-extrabold text-red-300 uppercase tracking-wider">
-                        <Clock className="w-6 h-6 inline mr-3 animate-spin-slow"/>
-                        Limited Offer: Slots are filling fast for Detty December — <span className="text-3xl text-yellow-300">ONLY 30 OPENINGS LEFT!</span>
-                    </p>
-                    <p className="text-sm text-red-400 mt-2">(Mobile-optimized for load times &lt;3s - Your customers won't wait!)</p>
-                </section>
-
-                {/* Benefits Section */}
-                <section className="mb-24">
-                    <h2 className="text-4xl font-bold text-center mb-12 text-white">Why Revamp Before Year-End?</h2>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {benefits.map((b, index) => (
-                            <Card key={index} icon={b.icon} title={b.title} description={b.description} />
-                        ))}
-                    </div>
+                {/* Benefits Carousel */}
+                <section className="mb-12 px-2">
+                    <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 text-white">
+                        How we benefit your <span className='text-purple-500'>business?</span>
+                    </h2>
+                    <Carousel items={benefits} />
                 </section>
                 
-                {/* Pricing Section */}
-                <section className="mb-24">
-                    <h2 className="text-4xl font-bold text-center mb-12 text-white">Transparent Pricing for Immediate Impact</h2>
-                    <div className="grid md:grid-cols-3 gap-8">
-                        {prices.map((p, index) => (
-                            <div key={index} className={`p-8 rounded-2xl text-center shadow-xl transition-all duration-300 
-                                ${index === 1 ? 'bg-purple-800 border-4 border-purple-500 transform scale-[1.05] shadow-purple-500/50' : 'bg-gray-900/70 border border-gray-700 hover:border-purple-600'}`}>
-                                <h3 className="text-2xl font-extrabold mb-2 text-white">{p.name}</h3>
-                                <p className="text-5xl font-extrabold text-purple-400 mb-4">{p.price}</p>
-                                <p className="text-gray-300 mb-6">{p.description}</p>
-                                <a 
-                                    href="#cta" 
-                                    className={`block py-2 rounded-full font-bold transition-colors 
-                                    ${index === 1 ? 'bg-white text-black hover:bg-gray-300' : 'bg-purple-600 text-white hover:bg-purple-500'}`}
-                                >
-                                    Select Package
-                                </a>
+                {/* Pricing Section with Stickers */}
+                <section className="mb-12 px-2 relative">
+                    <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 text-white">Pricing</h2>
+                    
+                    {/* Urgency Sticker */}
+                    {/* <div className="absolute top-0 left-2 sm:left-4 lg:left-8 z-40">
+                        <div className="relative bg-gradient-to-br from-red-500 via-red-600 to-red-700 rounded-full w-[80px] h-[80px] sm:w-[120px] sm:h-[120px] shadow-2xl shadow-red-900/60 transform rotate-12 hover:rotate-0 hover:scale-150 transition-all duration-500 cursor-pointer">
+                            <div className="absolute inset-0 rounded-full border-4 border-yellow-300 border-dashed animate-spin-slow"></div>
+                            <div className="absolute inset-0 flex flex-col items-center justify-center p-3">
+                                <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-300 mb-0.5 animate-pulse" />
+                                <h3 className="text-[9px] sm:text-xs font-black text-white uppercase text-center leading-tight">
+                                    Only
+                                </h3>
+                                <div className="bg-yellow-300 rounded-full px-2 py-0.5 my-0.5">
+                                    <p className="text-[10px] sm:text-xs text-red-700 font-black">30</p>
+                                </div>
+                                <p className="text-[8px] sm:text-[9px] text-yellow-100 font-semibold text-center leading-tight">
+                                    Slots Left!
+                                </p>
                             </div>
-                        ))}
+                            <Star className="absolute top-1 right-1 w-2.5 h-2.5 text-yellow-300 animate-pulse" />
+                            <Star className="absolute bottom-1 left-1 w-2.5 h-2.5 text-yellow-300 animate-pulse delay-75" />
+                        </div>
+                    </div> */}
+
+                    {/* Limited Offer Sticker */}
+                    <div className="absolute top-0 right-2 sm:right-4 lg:right-8 z-40">
+                        <div className="relative bg-gradient-to-br from-purple-500 via-purple-600 to-purple-700 rounded-full w-[80px] h-[80px] sm:w-[120px] sm:h-[120px] shadow-2xl shadow-purple-900/60 transform -rotate-12 hover:rotate-0 hover:scale-150 transition-all duration-500 cursor-pointer">
+                            <div className="absolute inset-0 rounded-full border-4 border-white border-dashed animate-spin-slow"></div>
+                            <div className="absolute inset-0 flex flex-col items-center justify-center p-5">
+                                <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-white mb-0.5 animate-pulse" />
+                                <h3 className="text-[10px] sm:text-xs font-black text-white uppercase tracking-wider">
+                                    Limited
+                                </h3>
+                                <h3 className="text-xs sm:text-sm font-black text-white uppercase -mt-0.5">
+                                    Offer!
+                                </h3>
+                                <div className="mt-0.5 bg-white rounded-full px-2 py-0.5">
+                                    <p className="text-[10px] sm:text-xs text-purple-700 font-black">
+                                        30 SLOTS
+                                    </p>
+                                </div>
+                            </div>
+                            <Star className="absolute top-1 right-1 w-2.5 h-2.5 text-white animate-pulse" />
+                            <Star className="absolute bottom-1 left-1 w-2.5 h-2.5 text-white animate-pulse delay-75" />
+                        </div>
+                    </div>
+                    
+                    <div className="max-w-3xl mx-auto mt-16">
+                        <div className="p-6 md:p-8 rounded-2xl text-center shadow-xl bg-gradient-to-r from-purple-900/70 to-gray-900/70 border-2 border-purple-500">
+                            <h3 className="text-xl md:text-2xl font-extrabold mb-3 text-white">Complete Revamp Package</h3>
+                            <p className="text-3xl md:text-5xl font-extrabold text-purple-400 mb-4">
+                                ₦180,000 – ₦850,000
+                            </p>
+                            <p className="text-gray-300 mb-4 text-sm md:text-base">Custom solutions for your business</p>
+                            <a 
+                                href="#cta" 
+                                className="inline-block px-6 py-2 md:px-8 md:py-3 bg-purple-600 text-white font-bold rounded-full hover:bg-purple-500 transition-colors text-sm md:text-base whitespace-nowrap"
+                            >
+                                Get Custom Quote
+                            </a>
+                        </div>
                     </div>
                 </section>
 
-                {/* Social Proof & Secondary CTA */}
-                <section className="mb-24">
-                    <div className="bg-purple-900/30 p-8 rounded-xl border border-purple-700/50 shadow-2xl shadow-purple-900/50 text-center">
-                        <p className="text-2xl italic text-gray-200 mb-6">
-                            "Our website revamp with Delacruz increased online leads by <span className="text-purple-400 font-bold">50% in one week!</span>"
+                {/* Final CTA Section */}
+                <section className="mb-12 px-2">
+                    <div className="bg-purple-900/30 p-4 md:p-6 rounded-xl border border-purple-700/50 shadow-2xl shadow-purple-900/50 text-center">
+                        <p className="text-xl md:text-2xl font-bold text-white mb-4">
+                            Reserve Your Slot Now!
                         </p>
-                        <p className="text-sm text-purple-300 mb-8">
-                            — SME Client, Lagos
-                        </p>
+                        
                         <a 
                             href="#cta" 
-                            className="px-8 py-3 bg-purple-500 text-white font-bold text-xl rounded-full shadow-lg 
-                                       hover:bg-purple-400 transform hover:translate-y-[-2px] transition duration-300"
+                            className="inline-block px-6 py-2 md:px-8 md:py-3 bg-purple-500 text-white font-bold text-sm md:text-lg rounded-full shadow-lg 
+                                       hover:bg-purple-400 transform hover:translate-y-[-2px] transition duration-300 whitespace-nowrap"
                         >
-                            <Mail className="w-6 h-6 inline mr-2"/>
-                            Secure Your Slot Now! (Only 30 Left)
+                            <Mail className="w-4 h-4 md:w-5 md:h-5 inline mr-2"/>
+                            Secure Slot (30 Left)
                         </a>
-                        <p className="text-xs text-gray-500 mt-4">
-                            Note: We use UTM codes for all ad sources to ensure seamless tracking of your investment ROI.
-                        </p>
                     </div>
                 </section>
 
                 {/* Footer */}
-                <footer className="py-6 border-t border-gray-800 text-center text-gray-500 text-sm">
-                    <p>&copy; {new Date().getFullYear()} DELACRUZ. All Rights Reserved. | Designed for Speed and Sales.</p>
+                <footer className="py-4 border-t border-gray-800 text-center text-gray-500 text-xs">
+                    <p>&copy; {new Date().getFullYear()} DELACRUZ. All Rights Reserved.</p>
                 </footer>
             </main>
         </div>
