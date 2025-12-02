@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Clock, Zap, Target, DollarSign, ArrowRight, Star, AlertTriangle, MessageSquare, Briefcase, Users, CheckCircle, Send, MessageCircle } from 'lucide-react';
-
+import Santa_cap from '../assets/santa_logo.png'
 // Define the primary color palette and custom animation for the digital/tech aesthetic
 const primaryColor = 'text-purple-400';
 const primaryBg = 'bg-purple-600';
@@ -170,9 +170,9 @@ const LandingPage6 = () => {
             <span className={`digital-glow-text ${primaryColor}`}>
               <span className="relative inline-block">
                 <img 
-                  src="https://www.svgrepo.com/show/404564/santa-hat.svg" 
+                  src={Santa_cap}
                   alt="Santa Hat" 
-                  className="absolute -top-1 -left-1 sm:-top-2 sm:-left-2 w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 transform -rotate-12" 
+                  className="absolute -top-1 -left-0.2 sm:-top-2 sm:left-1 w-5 h-5 sm:w-4 sm:h-4 md:w-8 md:h-8 transform -rotate-12" 
                 />
                 A
               </span>

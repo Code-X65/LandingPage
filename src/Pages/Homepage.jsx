@@ -6,7 +6,7 @@ const Homepage = () => {
 
   const cards = [
     { 
-      title: 'Landing Page 1',
+      title: 'Business Process Automation Lite',
       previews: [
         { id: 1, name: 'Preview 1', route: '/landing1/preview1' },
         { id: 2, name: 'Preview 2', route: '/landing1/preview2' },
@@ -14,7 +14,7 @@ const Homepage = () => {
       ]
     },
     { 
-      title: 'Landing Page 2',
+      title: 'Website Revamp + Integrated Systems',
       previews: [
         { id: 1, name: 'Preview 1', route: '/landing2/preview1' },
         { id: 2, name: 'Preview 2', route: '/landing2/preview2' },
@@ -22,7 +22,7 @@ const Homepage = () => {
       ]
     },
     { 
-      title: 'Landing Page 3',
+      title: 'IT Advisory Retainer',
       previews: [
         { id: 1, name: 'Preview 1', route: '/landing3/preview1' },
         { id: 2, name: 'Preview 2', route: '/landing3/preview2' },
