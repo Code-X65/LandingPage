@@ -8,24 +8,24 @@ const Homepage = () => {
     { 
       title: 'Business Process Automation Lite',
       previews: [
-        { id: 1, name: 'Preview 1', route: '/landing1/preview1' },
-        { id: 2, name: 'Preview 2', route: '/landing1/preview2' },
+        // { id: 1, name: 'Preview 1', route: '/landing1/preview1' },
+        // { id: 2, name: 'Preview 2', route: '/landing1/preview2' },
         { id: 3, name: 'Preview 3', route: '/landing1/preview3' }
       ]
     },
     { 
       title: 'Website Revamp + Integrated Systems',
       previews: [
-        { id: 1, name: 'Preview 1', route: '/landing2/preview1' },
+        // { id: 1, name: 'Preview 1', route: '/landing2/preview1' },
         { id: 2, name: 'Preview 2', route: '/landing2/preview2' },
-        { id: 3, name: 'Preview 3', route: '/landing2/preview3' }
+        // { id: 3, name: 'Preview 3', route: '/landing2/preview3' }
       ]
     },
     { 
       title: 'IT Advisory Retainer',
       previews: [
-        { id: 1, name: 'Preview 1', route: '/landing3/preview1' },
-        { id: 2, name: 'Preview 2', route: '/landing3/preview2' },
+        // { id: 1, name: 'Preview 1', route: '/landing3/preview1' },
+        // { id: 2, name: 'Preview 2', route: '/landing3/preview2' },
         { id: 3, name: 'Preview 3', route: '/landing3/preview3' }
       ]
     }
