@@ -1,6 +1,59 @@
 import React, { useState, useEffect } from 'react';
 import { Clock, Zap, Target, DollarSign, ArrowRight, Star, AlertTriangle, MessageSquare, Briefcase, Users, CheckCircle, Send, MessageCircle } from 'lucide-react';
 import Santa_cap from '../assets/santa_logo.png'
+
+// UTM Tracking Functions
+const getUTMParameters = () => {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    utm_source: params.get('utm_source') || 'direct',
+    utm_medium: params.get('utm_medium') || 'none',
+    utm_campaign: params.get('utm_campaign') || 'none',
+    utm_content: params.get('utm_content') || 'none',
+    utm_term: params.get('utm_term') || 'none'
+  };
+};
+
+const trackUTMEvent = (eventName, utmData) => {
+  // Log to console for debugging
+  console.log('UTM Event:', eventName, utmData);
+  
+  // Send to Google Analytics (GA4)
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', eventName, {
+      campaign_source: utmData.utm_source,
+      campaign_medium: utmData.utm_medium,
+      campaign_name: utmData.utm_campaign,
+      campaign_content: utmData.utm_content,
+      campaign_term: utmData.utm_term,
+      cta_name: utmData.cta_name || null,
+      cta_location: utmData.cta_location || null,
+      page_location: window.location.href,
+      page_title: document.title
+    });
+  }
+  
+  // Store in memory for session tracking
+  if (typeof window !== 'undefined') {
+    window.utmTracking = window.utmTracking || [];
+    window.utmTracking.push({
+      event: eventName,
+      timestamp: new Date().toISOString(),
+      ...utmData
+    });
+  }
+};
+
+const buildTrackingURL = (baseURL, utmParams) => {
+  const url = new URL(baseURL);
+  Object.entries(utmParams).forEach(([key, value]) => {
+    if (value && value !== 'none') {
+      url.searchParams.set(key, value);
+    }
+  });
+  return url.toString();
+};
+
 // Define the primary color palette and custom animation for the digital/tech aesthetic
 const primaryColor = 'text-purple-400';
 const primaryBg = 'bg-purple-600';
@@ -78,6 +131,16 @@ const customStyles = `
     animation: whatsapp-pulse 2s infinite;
   }
 `;
+const Whatsapp = (props) => (
+    <svg 
+        {...props} 
+        xmlns="http://www.w3.org/2000/svg" 
+        viewBox="0 0 24 24" 
+        fill="currentColor"
+    >
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+);
 
 const BenefitCard = ({ icon: Icon, title, description }) => (
   <div className="p-4 sm:p-5 bg-gray-900/50 backdrop-blur-sm border border-purple-900 hover:border-purple-600 transition-all duration-300 rounded-xl shadow-xl hover:shadow-purple-900/60 h-full">
@@ -90,6 +153,14 @@ const BenefitCard = ({ icon: Icon, title, description }) => (
 const LandingPage6 = () => {
   // Simple state for a countdown timer (simulating urgency)
   const [timeLeft, setTimeLeft] = useState(72 * 3600); 
+  const [utmParams, setUtmParams] = useState({});
+
+  useEffect(() => {
+    // Capture UTM parameters on page load
+    const params = getUTMParameters();
+    setUtmParams(params);
+    trackUTMEvent('page_view', params);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -103,6 +174,18 @@ const LandingPage6 = () => {
     const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
     const s = String(seconds % 60).padStart(2, '0');
     return `${h}:${m}:${s}`;
+  };
+
+  const handleCTAClick = (ctaName) => {
+    trackUTMEvent('cta_click', {
+      ...utmParams,
+      cta_name: ctaName,
+      cta_location: 'main'
+    });
+  };
+
+  const handleWhatsAppClick = () => {
+    trackUTMEvent('whatsapp_click', utmParams);
   };
 
   const benefits = [
@@ -123,7 +206,7 @@ const LandingPage6 = () => {
     },
   ];
 
-  const whatsappNumber = "2348123456789"; // Replace with actual WhatsApp number
+  const whatsappNumber = "2348012345678";
   const whatsappMessage = encodeURIComponent("Hello! I'm interested in your Detty December Automation Special. Can you tell me more?");
 
   return (
@@ -131,18 +214,30 @@ const LandingPage6 = () => {
       {/* Embedded Styles */}
       <style>{customStyles}</style>
 
-      {/* WhatsApp Floating Button */}
-      <a
-        href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-4 sm:bottom-8 sm:right-6 z-50 "
-      >
-        <div className="bg-[#25D366] hover:bg-[#128C7E] p-3 sm:p-4 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110">
-          <MessageCircle className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
-        </div>
-     
-      </a>
+      {/* Google Analytics GA4 Script */}
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-67B91K1K5Q"></script>
+      <script dangerouslySetInnerHTML={{__html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-67B91K1K5Q', {
+          send_page_view: false
+        });
+      `}} />
+
+           {/* Fixed WhatsApp Button */}
+            <a 
+                href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleWhatsAppClick}
+                className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 p-4 rounded-full shadow-2xl transition-all hover:scale-110 group"
+            >
+                <Whatsapp className="w-7 h-7 text-white" />
+                <span className="absolute bottom-full right-0 mb-2 bg-gray-900 text-white text-xs px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                    Chat with us!
+                </span>
+            </a>
 
     
 
@@ -190,6 +285,7 @@ const LandingPage6 = () => {
           <div className="flex flex-col sm:flex-row justify-center items-center gap-3 max-w-xl mx-auto">
             <a
               href="#"
+              onClick={() => handleCTAClick('free_automation_audit')}
               className={`
                 flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-4 text-sm sm:text-base font-bold
                 rounded-full transition duration-500 transform
