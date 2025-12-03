@@ -1,6 +1,12 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { Mail, Clock, Zap, DollarSign, Send, CheckCircle, ChevronLeft, ChevronRight, Star, Quote, Linkedin, Facebook, Twitter, Instagram } from 'lucide-react';
+import amala from '../assets/amala.png'
+import benfash from '../assets/benfash.png'
+import cqc from '../assets/cqc.png'
+import easyjet from '../assets/easyjet.png'
+import echohive from '../assets/echohive.png'
 import * as THREE from 'three';
+import LOGO from '../assets/logo.png'
 
 // ====================================================================
 // Custom WhatsApp Icon Component
@@ -166,8 +172,6 @@ const Carousel = ({ items }) => {
                 <h3 className="text-xl font-semibold text-white mb-2 text-center">{Item.title}</h3>
                 <p className="text-gray-300 text-center text-sm">{Item.description}</p>
             </div>
-            
-
 
             <div className="flex justify-center mt-4 gap-2">
                 {items.map((_, idx) => (
@@ -179,112 +183,6 @@ const Carousel = ({ items }) => {
             </div>
         </div>
     );
-};
-
-// ====================================================================
-// 4. SOCIAL PROOF COMPONENT WITH LUCIDE REACT
-// ====================================================================
-
-const SocialProof = ({ 
-  quote = "Our website revamp with Delacruz increased online leads by 50% in one week!",
-  author = "Sarah Johnson",
-  position = "Marketing Director, TechCorp",
-  optional = true
-}) => {
-  return (
-    <div className="max-w-4xl mx-auto p-6">
-      {/* Optional label */}
-      {optional && (
-        <div className="flex items-center justify-center mb-6">
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-            <CheckCircle className="w-4 h-4 mr-2" />
-            Optional Social Proof
-          </span>
-        </div>
-      )}
-
-      {/* Testimonial Card */}
-      <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10 border border-gray-100 hover:shadow-2xl transition-shadow duration-300">
-        {/* Quote icon */}
-        <div className="mb-6">
-          <Quote className="w-10 h-10 text-blue-500 opacity-20" />
-        </div>
-
-        {/* Quote text */}
-        <blockquote className="mb-8">
-          <p className="text-2xl md:text-3xl font-semibold text-gray-800 leading-relaxed">
-            "{quote}"
-          </p>
-        </blockquote>
-
-        {/* Author info */}
-        <div className="flex items-center">
-          {/* Avatar placeholder */}
-          <div className="flex-shrink-0 mr-4">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-              <span className="text-white font-bold text-lg">SJ</span>
-            </div>
-          </div>
-          
-          {/* Author details */}
-          <div>
-            <p className="font-bold text-gray-900 text-lg">{author}</p>
-            <p className="text-gray-600">{position}</p>
-          </div>
-        </div>
-
-        {/* Stats badge */}
-        <div className="mt-8 pt-8 border-t border-gray-100">
-          <div className="inline-flex items-center px-4 py-2 rounded-lg bg-gradient-to-r from-green-50 to-emerald-50 border border-green-100">
-            <span className="text-3xl font-bold text-green-700 mr-2">50%</span>
-            <span className="text-green-800 font-medium">increase in online leads</span>
-          </div>
-          <p className="text-sm text-gray-500 mt-2">Achieved within one week of launch</p>
-        </div>
-      </div>
-
-      {/* Trust indicators */}
-      <div className="mt-8 flex flex-wrap justify-center items-center gap-6 text-gray-500">
-        <div className="flex items-center">
-          <div className="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
-          <span>Verified results</span>
-        </div>
-        <div className="hidden sm:block">•</div>
-        <div className="flex items-center">
-          <div className="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
-          <span>Real client testimonial</span>
-        </div>
-        <div className="hidden sm:block">•</div>
-        <div className="flex items-center">
-          <div className="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
-          <span>Performance metrics included</span>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Alternative minimal version
-const SocialProofMinimal = ({ 
-  quote = "Our website revamp with Delacruz increased online leads by 50% in one week!"
-}) => {
-  return (
-    <div className="bg-gray-50 rounded-xl p-6 border-l-4 border-blue-500">
-      <div className="flex items-start">
-        <Quote className="w-5 h-5 text-blue-400 mt-1 mr-3 flex-shrink-0" />
-        <div>
-          <p className="text-gray-800 text-lg font-medium italic">"{quote}"</p>
-          <div className="mt-4 flex items-center">
-            <div className="w-8 h-8 rounded-full bg-blue-500 mr-3"></div>
-            <div>
-              <p className="text-sm font-semibold text-gray-900">Sarah Johnson</p>
-              <p className="text-xs text-gray-600">Marketing Director</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
 };
 
 // ====================================================================
@@ -377,29 +275,229 @@ const SocialProofDark = ({
           </div>
         </div>
       </div>
-
-      {/* Trust indicators */}
-      {/* <div className="mt-6 flex flex-wrap justify-center items-center gap-4 text-gray-500 text-xs">
-        <div className="flex items-center">
-          <CheckCircle className="w-3 h-3 text-green-500 mr-1.5" />
-          <span>Verified client</span>
-        </div>
-        <div className="hidden sm:block">•</div>
-        <div className="flex items-center">
-          <CheckCircle className="w-3 h-3 text-green-500 mr-1.5" />
-          <span>Active project 2024</span>
-        </div>
-        <div className="hidden sm:block">•</div>
-        <div className="flex items-center">
-          <CheckCircle className="w-3 h-3 text-green-500 mr-1.5" />
-          <span>Posted on LinkedIn</span>
-        </div>
-      </div> */}
     </div>
   );
 };
+
+
 // ====================================================================
-// 6. MAIN APP COMPONENT
+// TESTIMONIALS SLIDER COMPONENT
+// ====================================================================
+
+const TestimonialSlider = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  
+  const testimonials = [
+    {
+      company: "AmalaOnTheGo",
+      logo: amala,
+      text: "Delacruz Innovations transformed our brand and operations beyond our expectations. Their strategic approach helped us streamline our online ordering system, increase customer engagement, and scale our visibility rapidly. We've seen a significant boost in daily orders and customer retention since they came on board.",
+      author: "AmalaOnTheGo Team",
+      role: ""
+    },
+    {
+      company: "Benfash",
+      logo: benfash,
+      text: "Working with Delacruz Innovations completely reshaped our fashion brand's digital presence. From brand positioning to e-commerce optimisation, their team delivered with precision, creativity, and excellence. Our online sales increased and our brand identity became clearer, stronger, and more professional.",
+      author: "Benfash Creative Director",
+      role: ""
+    },
+    {
+      company: "EchoHive Creatives",
+      logo: echohive,
+      text: "Delacruz Innovations brought structure, clarity, and strategic direction to our creative agency. Their consulting support helped us define our service lines, organise our workflow, and develop a scalable business model. Their expertise elevated our brand and positioned us for long-term success.",
+      author: "EchoHive Creatives Management",
+      role: ""
+    },
+    {
+      company: "Care Quality Commission",
+      logo: cqc,
+      text: "Delacruz Innovations demonstrated exceptional professionalism supporting our service improvement initiatives. Their analytical approach, documentation quality, and stakeholder coordination were of the highest standard. They helped enhance our operational processes, ensuring compliance, efficiency, and better communication within teams.",
+      author: "Senior Compliance Officer",
+      role: "Care Quality Commission – Sheffield"
+    },
+    {
+      company: "easyJet",
+      logo: easyjet,
+      text: "Delacruz Innovations added tremendous value to our digital and operational transformation efforts. Their clarity, business analysis expertise, and ability to simplify complex workflows were instrumental in improving efficiency across our teams. Their consultants deliver work that is consistently accurate, timely, and impactful.",
+      author: "Project Lead",
+      role: "easyJet Luton"
+    }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+  };
+
+  const goToPrevious = () => {
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  };
+
+  return (
+    <div className="relative max-w-4xl mx-auto">
+      <div className="bg-gray-900/70 backdrop-blur-md rounded-xl border border-purple-700/50 shadow-lg p-6 md:p-8 min-h-[350px] md:min-h-[400px]">
+        {/* Company Logo */}
+        <div className="flex justify-center mb-4 md:mb-6">
+          <img 
+            src={testimonials[currentIndex].logo} 
+            alt={testimonials[currentIndex].company}
+            className="h-20 md:h-20 object-contain opacity-90"
+          />
+        </div>
+
+ 
+
+        {/* Quote Icon */}
+        <div className="flex justify-center mb-3">
+          <Quote className="w-8 h-8 md:w-10 md:h-10 text-purple-400/50" />
+        </div>
+
+        {/* Testimonial Text */}
+        <blockquote className="text-sm md:text-base text-gray-200 leading-relaxed mb-6 text-center px-2">
+          "{testimonials[currentIndex].text}"
+        </blockquote>
+
+        {/* Author Info */}
+        <div className="text-center border-t border-gray-800 pt-4">
+          <p className="font-semibold text-white text-base md:text-lg">
+            — {testimonials[currentIndex].author}
+          </p>
+          {testimonials[currentIndex].role && (
+            <p className="text-purple-400/80 text-xs md:text-sm mt-1">
+              {testimonials[currentIndex].role}
+            </p>
+          )}
+        </div>
+
+        {/* Engagement metrics */}
+        <div className="flex items-center justify-center gap-6 pt-4 mt-4 border-t border-gray-800">
+          <div className="flex items-center gap-2 text-gray-400 text-xs md:text-sm">
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+            </svg>
+            <span>28 reactions</span>
+          </div>
+          <div className="flex items-center gap-2 text-gray-400 text-xs md:text-sm">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+            <span>12 comments</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation Arrows */}
+      <button
+        onClick={goToPrevious}
+        className="absolute left-0 top-1/2 -translate-y-1/2 bg-purple-600/80 hover:bg-purple-700 p-2 md:p-3 rounded-full transition-all -ml-2 md:-ml-4 shadow-lg"
+        aria-label="Previous testimonial"
+      >
+        <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-white" />
+      </button>
+      
+      <button
+        onClick={goToNext}
+        className="absolute right-0 top-1/2 -translate-y-1/2 bg-purple-600/80 hover:bg-purple-700 p-2 md:p-3 rounded-full transition-all -mr-2 md:-mr-4 shadow-lg"
+        aria-label="Next testimonial"
+      >
+        <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-white" />
+      </button>
+
+      {/* Dots Navigation */}
+      <div className="flex justify-center gap-2 mt-6">
+        {testimonials.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-all ${
+              index === currentIndex 
+                ? 'bg-purple-400 w-6 md:w-8' 
+                : 'bg-gray-600 hover:bg-gray-500'
+            }`}
+            aria-label={`Go to testimonial ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// ====================================================================
+// 6. TOP SPLASH COMPONENT
+// ====================================================================
+
+const TopSplash = () => {
+  return (
+    <div className="relative overflow-hidden bg-gradient-to-r from-purple-900 via-black to-purple-900 py-3 px-4 border-b border-purple-700/50">
+      {/* Animated background */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-0 w-32 h-32 bg-purple-500 rounded-full mix-blend-screen opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-0 right-0 w-40 h-40 bg-blue-500 rounded-full mix-blend-screen opacity-10 animate-ping"></div>
+      </div>
+      
+      <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-2">
+        <div className="flex items-center gap-2">
+          <Zap className="w-4 h-4 text-yellow-400 animate-pulse" />
+          <span className="text-xl font-bold text-white">DETTY DECEMBER SPECIAL</span>
+        </div>
+        
+      
+      </div>
+      
+      {/* Animated border */}
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
+    </div>
+  );
+};
+
+// ====================================================================
+// 7. BIG LIMITED OFFER STICKER
+// ====================================================================
+
+const BigLimitedOffer = () => {
+  return (
+<div className="hidden absolute right-20 top-2 z-50 animate-bounce-slow scale-150 ">
+  <div className="relative bg-gradient-to-br from-red-500 via-pink-600 to-purple-700 
+      rounded-xl shadow-lg px-3 py-2 cursor-pointer transition-all duration-300 
+      hover:scale-105 hover:shadow-red-800/40 rounded-full">
+
+    {/* Speech bubble pointer */}
+    <div className="absolute -bottom-1 right-3 w-3 h-3 bg-gradient-to-br from-red-500 to-purple-700 
+        rotate-45"></div>
+
+    {/* Glow */}
+    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-red-600 to-purple-600 
+        blur-md opacity-40"></div>
+
+    {/* Content */}
+    <div className="relative z-10 flex items-center gap-2">
+      <Zap className="w-4 h-4 text-yellow-300 animate-pulse" />
+
+      <div className="text-white text-xs font-bold leading-tight">
+        <p className="uppercase tracking-wider">Limited</p>
+        <p className="uppercase text-[10px]">Offer!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  );
+};
+
+// ====================================================================
+// 8. MAIN APP COMPONENT
 // ====================================================================
 
 const LandingPage2 = () => {
@@ -414,9 +512,12 @@ const LandingPage2 = () => {
 
     return (
         <div className="min-h-screen bg-black text-white font-sans overflow-x-hidden">
+            {/* Top Splash */}
+            <TopSplash />
+            
             {/* Fixed WhatsApp Button */}
             <a 
-                href="https://wa.me/2348012345678"
+                href="https://api.whatsapp.com/send/?phone=2349052765358&text&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 p-4 rounded-full shadow-2xl transition-all hover:scale-110 group"
@@ -432,60 +533,66 @@ const LandingPage2 = () => {
                 ${isPulsing ? 'scale-[0.99] blur-[0.5px] brightness-125' : 'scale-100 blur-0 brightness-100'}`}
             >
                 {/* Header */}
-                <header className="py-3 flex justify-center items-center">
-                 <img src="https://delacruzinnovations.com/assets/logo-BRFRQ7Mn.jpg" alt="Delacruz Innovations" className='w-10 h-10' />
+                <header className="py-1 flex justify-center items-center ">
+                 <img src={LOGO} alt="Delacruz Innovations" className='w-25 h-25 object-contain' />
                 </header>
                 
+             
+                
                 {/* Hero Section - Reduced Height */}
-                <section className="relative h-[90vh] flex flex-col justify-center items-center text-center overflow-hidden mb-4">
+                <section className="relative py-8 flex flex-col justify-center items-center text-center overflow-hidden mb-4">
                     <ThreeJsHero />
 
                     <div className="relative z-10 max-w-4xl p-4 md:p-6 bg-black/40 rounded-xl mx-2">
+                       {/* Big Limited Offer Sticker */}
+                <div className="flex justify-center mb-4">
+                  <BigLimitedOffer />
+                </div>
                         <p className="text-xs md:text-sm font-semibold tracking-widest uppercase text-purple-400 mb-2">
                             Website Revamp + Integrated Systems
                         </p>
-                        <h2 className="text-2xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-3 md:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-white">
-                            Upgrade Your Website This Detty December. <br className="hidden md:block" />
+                        <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-3 md:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-white">
+                            Upgrade Your Website This Detty December.
+                            <br /> 
                             <span className="text-xl md:text-3xl lg:text-4xl">Launch in 7 Days!!</span>
                         </h2>
                         <p className="text-sm md:text-lg text-gray-300 max-w-3xl mx-auto mb-4 md:mb-6">
-                          Professional website + payment integration + WhatsApp CRM. Perfect for Businesses ready to boost sales before year end.
+                          Professional Website + Payment Integration + WhatsApp CRM. Perfect for Businesses ready to boost sales before year end.
 
                         </p>
                         
-                        <div className="flex justify-center" id="cta">
+                        <div className="flex justify-center mx-4" id="cta">
                             <a 
-                                href="#cta-form" 
-                                className="px-4 py-3 md:px-6 md:py-3 bg-white text-black font-bold text-sm md:text-base rounded-full shadow-2xl shadow-purple-500/50 
-                                           hover:bg-purple-500 hover:text-white transform  transition-all duration-300 group whitespace-nowrap"
+                            target='_blank'
+                                href="https://api.whatsapp.com/send/?phone=2349052765358&text&type=phone_number&app_absent=0" 
+                                className="px-4 py-3 md:px-6 md:py-3 bg-white text-black font-bold text-md md:text-base rounded-full shadow-2xl shadow-purple-500/50 
+                                           hover:bg-purple-500 hover:text-white transform  transition-all duration-300 group whitespace-nowrap flex items-center gap-1"
                             >
-                                <Zap className="w-4 h-4 inline mr-1 group-hover:rotate-6 transition duration-200"/>
-                               Reserve Your December Website Revamp Slot!
+                               
+                               Reserve Your December Website Revamp Slot! <Whatsapp className="w-7 h-7 text-green-500 " />
                             </a>
                         </div>
                     </div>
                 </section>
 
                 {/* Benefits Carousel */}
-                <section className="mb-4 px-2">
+                <section className="mb-2 px-2">
                     <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 text-white">
-                        How we benefit your <span className='text-purple-500'>Business?</span>
+                        How we benefit your Business?
                     </h2>
                     <Carousel items={benefits} />
                 </section>
-
-           
                 
                 {/* Pricing Section with Stickers */}
-                <section className="mb-12 px-2 relative">
-                    <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 text-white">Pricing</h2>
+                <section className="mb-4 px-2 relative">
+                    <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 text-white">Our Prices Ranges From -</h2>
                     
                     {/* Limited Offer Sticker */}
-                    <div className="absolute top-0 right-2 sm:right-4 lg:right-8 z-40">
+                    {/* <div className="absolute top-0 right-2 sm:right-4 lg:right-8 z-40">
                         <div className="relative bg-gradient-to-br from-purple-500 via-purple-600 to-purple-700 rounded-full w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] shadow-2xl shadow-purple-900/60 transform -rotate-12 hover:rotate-0 hover:scale-150 transition-all duration-500 cursor-pointer">
                             <div className="absolute inset-0 rounded-full border-4 border-white border-dashed animate-spin-slow"></div>
                             <div className="absolute inset-0 flex flex-col items-center justify-center p-5">
-                                <Zap className="w-4 h-4 sm:w-5 sm:ah-5 text-white mb-0.5 animate-pulse" />
+                                <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-white mb-0.5 animate-pulse" />
                                 <h3 className="text-[10px] sm:text-xs font-black text-white uppercase tracking-wider">
                                     Limited
                                 </h3>
@@ -501,98 +608,109 @@ const LandingPage2 = () => {
                             <Star className="absolute top-1 right-1 w-2.5 h-2.5 text-white animate-pulse" />
                             <Star className="absolute bottom-1 left-1 w-2.5 h-2.5 text-white animate-pulse delay-75" />
                         </div>
-                    </div>
+                    </div> */}
                     
                     <div className="max-w-3xl mx-auto mt-4">
-                        <div className="p-6 md:p-8 rounded-2xl text-center shadow-xl bg-gradient-to-r from-purple-900/70 to-gray-900/70 border-2 border-purple-500">
+                        <div className="p-6 md:px-8 rounded-2xl text-center shadow-xl bg-gradient-to-r from-purple-900/70 to-gray-900/70 border-2 border-purple-500">
                             <h3 className="text-xl md:text-2xl font-extrabold mb-3 text-white">Complete Revamp Package</h3>
                             <p className="text-xl md:text-5xl font-extrabold text-purple-400 mb-4">
                                 ₦180,000 – ₦850,000
                             </p>
                             <p className="text-gray-300 mb-4 text-sm md:text-base">Custom solutions for your business</p>
-                        
                         </div>
                     </div>
                 </section>
 
-                {/* Final CTA Section */}
-                {/* <section className="mb-12 px-2">
-                    <div className="bg-purple-900/30 p-4 md:p-6 rounded-xl border border-purple-700/50 shadow-2xl shadow-purple-900/50 text-center">
-                        <p className="text-xl md:text-2xl font-bold text-white mb-4">
-                            Reserve Your December Website Revamp Slot!
-                        </p>
-                        
-                        <a 
-                            href="#cta" 
-                            className="inline-block px-6 py-2 md:px-8 md:py-3 bg-purple-500 text-white font-bold text-sm md:text-lg rounded-full shadow-lg 
-                                       hover:bg-purple-400 transform hover:translate-y-[-2px] transition duration-300 whitespace-nowrap"
-                        >
-                            <Mail className="w-4 h-4 md:w-5 md:h-5 inline mr-2"/>
-                            Secure Slot (30 Left)
-                        </a>
-                    </div>
-                </section> */}
+                <div className='text-xl font-bold text-center mb-4 uppercase'>
+                  Slots are filling fast for Detty December only 30 openings left
+                </div>
 
-                     {/* Social Proof Section - Dark Theme */}
+                {/* Social Proof Section - Dark Theme */}
                 <section className="mb-8 px-2">
-                    <SocialProofDark />
+                <TestimonialSlider />
                 </section>
 
               {/* Footer */}
-  <footer className="py-8 border-t border-gray-800 text-center">
-    {/* Social Media Links */}
-    <div className="flex justify-center items-center gap-6 mb-4">
-      <a 
-        href="https://linkedin.com" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="text-gray-500 hover:text-blue-500 transition-colors duration-200"
-        aria-label="LinkedIn"
-      >
-        <Linkedin className="w-5 h-5" />
-      </a>
-      <a 
-        href="https://facebook.com" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="text-gray-500 hover:text-blue-600 transition-colors duration-200"
-        aria-label="Facebook"
-      >
-        <Facebook className="w-5 h-5" />
-      </a>
-      <a 
-        href="https://twitter.com" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="text-gray-500 hover:text-sky-500 transition-colors duration-200"
-        aria-label="Twitter"
-      >
-        <Twitter className="w-5 h-5" />
-      </a>
-      <a 
-        href="https://instagram.com" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="text-gray-500 hover:text-pink-500 transition-colors duration-200"
-        aria-label="Instagram"
-      >
-        <Instagram className="w-5 h-5" />
-      </a>
-      <a 
-        href="mailto:contact@delacruz.com"
-        className="text-gray-500 hover:text-green-500 transition-colors duration-200"
-        aria-label="Email"
-      >
-        <Mail className="w-5 h-5" />
-      </a>
-    </div>
+              <footer className="py-8 border-t border-gray-800 text-center">
+                {/* Social Media Links */}
+                <div className="flex justify-center items-center gap-6 mb-4">
+                  <a 
+                    href="https://linkedin.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-gray-500 hover:text-blue-500 transition-colors duration-200"
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin className="w-5 h-5" />
+                  </a>
+                  <a 
+                    href="https://web.facebook.com/profile.php?id=61582853766401" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-gray-500 hover:text-blue-600 transition-colors duration-200"
+                    aria-label="Facebook"
+                  >
+                    <Facebook className="w-5 h-5" />
+                  </a>
+                  <a 
+                    href="https://x.com/Delacruz_Inno" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-gray-500 hover:text-sky-500 transition-colors duration-200"
+                    aria-label="Twitter"
+                  >
+                    <Twitter className="w-5 h-5" />
+                  </a>
+                  <a 
+                    href="https://www.instagram.com/delacruzinnovations/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-gray-500 hover:text-pink-500 transition-colors duration-200"
+                    aria-label="Instagram"
+                  >
+                    <Instagram className="w-5 h-5" />
+                  </a>
+                  <a 
+                    href="mailto:info@delacruzinnovations.com"
+                    className="text-gray-500 hover:text-green-500 transition-colors duration-200"
+                    aria-label="Email"
+                  >
+                    <Mail className="w-5 h-5" />
+                  </a>
+                </div>
 
-    {/* Copyright */}
-    <p className="text-gray-500 text-xs">
-      &copy; {new Date().getFullYear()} DELACRUZ. All Rights Reserved.
-    </p>
-  </footer>
+                {/* Copyright */}
+                <p className="text-gray-500 text-xs">
+                  &copy; {new Date().getFullYear()} DELACRUZ. All Rights Reserved.
+                </p>
+              </footer>
             </main>
+            
+            {/* Add custom animations to Tailwind */}
+            <style jsx global>{`
+                @keyframes bounce-slow {
+                    0%, 100% {
+                        transform: translateY(0) rotate(3deg);
+                    }
+                    50% {
+                        transform: translateY(-10px) rotate(3deg);
+                    }
+                }
+                .animate-bounce-slow {
+                    animation: bounce-slow 2s ease-in-out infinite;
+                }
+                @keyframes spin-slow {
+                    from {
+                        transform: rotate(0deg);
+                    }
+                    to {
+                        transform: rotate(360deg);
+                    }
+                }
+                .animate-spin-slow {
+                    animation: spin-slow 3s linear infinite;
+                }
+            `}</style>
         </div>
     );
 };

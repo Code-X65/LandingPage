@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Clock, Zap, Target, DollarSign, ArrowRight, Star, AlertTriangle, MessageSquare, Briefcase, Users, CheckCircle, Send, MessageCircle } from 'lucide-react';
 import Santa_cap from '../assets/santa_logo.png'
+import amala from '../assets/amala.png'
+import benfash from '../assets/benfash.png'
+import cqc from '../assets/cqc.png'
+import easyjet from '../assets/easyjet.png'
+import echohive from '../assets/echohive.png'
 
 // UTM Tracking Functions
 const getUTMParameters = () => {
@@ -150,6 +155,143 @@ const BenefitCard = ({ icon: Icon, title, description }) => (
   </div>
 );
 
+const TestimonialSlider = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  
+  const testimonials = [
+    {
+      company: "AmalaOnTheGo",
+      logo: amala,
+      text: "Delacruz Innovations transformed our brand and operations beyond our expectations. Their strategic approach helped us streamline our online ordering system, increase customer engagement, and scale our visibility rapidly. We've seen a significant boost in daily orders and customer retention since they came on board.",
+      author: "AmalaOnTheGo Team",
+      role: ""
+    },
+    {
+      company: "Benfash",
+      logo: benfash,
+      text: "Working with Delacruz Innovations completely reshaped our fashion brand's digital presence. From brand positioning to e-commerce optimisation, their team delivered with precision, creativity, and excellence. Our online sales increased and our brand identity became clearer, stronger, and more professional.",
+      author: "Benfash Creative Director",
+      role: ""
+    },
+    {
+      company: "EchoHive Creatives",
+      logo: echohive,
+      text: "Delacruz Innovations brought structure, clarity, and strategic direction to our creative agency. Their consulting support helped us define our service lines, organise our workflow, and develop a scalable business model. Their expertise elevated our brand and positioned us for long-term success.",
+      author: "EchoHive Creatives Management",
+      role: ""
+    },
+    {
+      company: "Care Quality Commission",
+      logo: cqc,
+      text: "Delacruz Innovations demonstrated exceptional professionalism supporting our service improvement initiatives. Their analytical approach, documentation quality, and stakeholder coordination were of the highest standard. They helped enhance our operational processes, ensuring compliance, efficiency, and better communication within teams.",
+      author: "Senior Compliance Officer",
+      role: "Care Quality Commission – Sheffield"
+    },
+    {
+      company: "easyJet",
+      logo: easyjet,
+      text: "Delacruz Innovations added tremendous value to our digital and operational transformation efforts. Their clarity, business analysis expertise, and ability to simplify complex workflows were instrumental in improving efficiency across our teams. Their consultants deliver work that is consistently accurate, timely, and impactful.",
+      author: "Project Lead",
+      role: "easyJet Luton"
+    }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+  };
+
+  const goToPrevious = () => {
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  };
+
+  return (
+    <div className="relative max-w-4xl mx-auto px-2 sm:px-4">
+      <div className="bg-gray-900/50 rounded-xl border border-purple-700 shadow-lg shadow-purple-900/50 p-4 sm:p-6 md:p-8 min-h-[300px] sm:min-h-[350px]">
+        {/* Company Logo */}
+        <div className="flex justify-center mb-4 sm:mb-6">
+          <img 
+            src={testimonials[currentIndex].logo} 
+            alt={testimonials[currentIndex].company}
+            className="h-20 sm:h-20 object-contain opacity-90"
+          />
+        </div>
+
+        {/* Star Rating */}
+        <div className="flex justify-center gap-1 mb-3 sm:mb-4">
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400 fill-purple-400" />
+          ))}
+        </div>
+
+        {/* Testimonial Text */}
+        <blockquote className="text-sm sm:text-base italic text-gray-200 leading-relaxed mb-4 sm:mb-6 text-center px-2">
+          "{testimonials[currentIndex].text}"
+        </blockquote>
+
+        {/* Author Info */}
+        <div className="text-center">
+          <p className="font-semibold text-white text-sm sm:text-base">
+            — {testimonials[currentIndex].author}
+          </p>
+          {testimonials[currentIndex].role && (
+            <p className="text-purple-400/80 text-xs sm:text-sm mt-1">
+              {testimonials[currentIndex].role}
+            </p>
+          )}
+        </div>
+      </div>
+
+      {/* Navigation Arrows */}
+      <button
+        onClick={goToPrevious}
+        className="absolute left-0 top-1/2 -translate-y-1/2 bg-purple-600/80 hover:bg-purple-700 p-2 sm:p-3 rounded-full transition-all -ml-2 sm:-ml-4"
+        aria-label="Previous testimonial"
+      >
+        <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      
+      <button
+        onClick={goToNext}
+        className="absolute right-0 top-1/2 -translate-y-1/2 bg-purple-600/80 hover:bg-purple-700 p-2 sm:p-3 rounded-full transition-all -mr-2 sm:-mr-4"
+        aria-label="Next testimonial"
+      >
+        <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      {/* Dots Navigation */}
+      <div className="flex justify-center gap-2 mt-4 sm:mt-6">
+        {testimonials.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all ${
+              index === currentIndex 
+                ? 'bg-purple-400 w-6 sm:w-8' 
+                : 'bg-gray-600 hover:bg-gray-500'
+            }`}
+            aria-label={`Go to testimonial ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const LandingPage6 = () => {
   // Simple state for a countdown timer (simulating urgency)
   const [timeLeft, setTimeLeft] = useState(72 * 3600); 
@@ -192,16 +334,16 @@ const LandingPage6 = () => {
     {
       icon: Clock,
       title: 'Time Savings',
-      description: 'Save up to 40% of your time on daily repetitive tasks by handing them over to smart automation!',
+      description: 'Save up to 40% of your time on daily repetitive manual tasks by handing them over to smart automation!',
     },
     {
       icon: CheckCircle,
       title: 'Precision & Accuracy',
-      description: 'Dramatically reduce human errors and improve the efficiency and quality of your business outputs.',
+      description: 'Dramatically reduce human errors and improve the efficiency including quality of your business outputs.',
     },
     {
       icon: Users,
-      title: 'Simple Training',
+      title: 'Simplified Training',
       description: 'We train your team in the new, simple automated workflows in less than a day, ensuring fast adoption.',
     },
   ];
@@ -227,7 +369,7 @@ const LandingPage6 = () => {
 
            {/* Fixed WhatsApp Button */}
             <a 
-                href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
+                href={`https://api.whatsapp.com/send/?phone=2349052765358&text&type=phone_number&app_absent=0`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleWhatsAppClick}
@@ -256,13 +398,13 @@ const LandingPage6 = () => {
 
         {/* 1. Hero Section */}
         <section id="hero" className="text-center pt-6 sm:pt-8">
-          <p className="text-xs sm:text-sm font-semibold uppercase tracking-widest mb-3 text-purple-400/80">
-            <AlertTriangle className="inline w-3 h-3 sm:w-4 sm:h-4 mr-1 mb-1" />
-            Detty December Special
+          <p className="text-2xl sm:text-sm font-semibold uppercase tracking-widest mb-3 text-purple-400/80">
+            <AlertTriangle className="inline w-3 h-3 sm:w-4 sm:h-4 mr-1 mb-1 text-xl" />
+            Detty December Special!!!
           </p>
           
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 sm:mb-5 leading-tight">
-            <span className={`digital-glow-text ${primaryColor}`}>
+            <span className={`digital-glow-text `}>
               <span className="relative inline-block">
                 <img 
                   src={Santa_cap}
@@ -274,7 +416,7 @@ const LandingPage6 = () => {
               utomate Your Business
             </span>
             <br className="hidden sm:block" />
-            <span className="text-white">Before Year End!</span>
+            <span className="text-white"> Before Year End!</span>
           </h2>
           
           <p className="text-sm sm:text-base text-gray-300 max-w-2xl mx-auto mb-6 sm:mb-7 px-2 leading-relaxed">
@@ -284,7 +426,7 @@ const LandingPage6 = () => {
 
           <div className="flex flex-col sm:flex-row justify-center items-center gap-3 max-w-xl mx-auto">
             <a
-              href="#"
+              href="https://api.whatsapp.com/send/?phone=2349052765358&text&type=phone_number&app_absent=0"
               onClick={() => handleCTAClick('free_automation_audit')}
               className={`
                 flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-4 text-sm sm:text-base font-bold
@@ -295,7 +437,7 @@ const LandingPage6 = () => {
               `}
             >
               Book Your FREE Automation Audit!
-              <ArrowRight className="w-4 h-4 ml-1" />
+              <Whatsapp className="w-9 h-9 text-green-500 font-bold" />
             </a>
           </div>
         </section>
@@ -303,7 +445,7 @@ const LandingPage6 = () => {
         {/* 2. Benefits Section */}
         <section id="benefits" className="pt-4 sm:pt-6">
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-center mb-4 sm:mb-6 px-4">
-            How we benefit your <span className={primaryColor}>business?</span>
+            How we benefit your business?
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 px-2">
             {benefits.map((benefit, index) => (
@@ -315,38 +457,10 @@ const LandingPage6 = () => {
     {/* 3. Pricing Section */}
 <section id="pricing" className="relative text-center pt-4 sm:pt-6 px-4">
   {/* Limited Offer Sticker - Positioned relative to pricing section */}
-  <div className="absolute top-0 right-1 sm:right-4 lg:right-8 z-40">
-    <div className="relative bg-gradient-to-br from-purple-500 via-purple-600 to-purple-700 rounded-full w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] shadow-2xl shadow-purple-900/60 transform -rotate-12 hover:rotate-0 hover:scale-150 transition-all duration-500 cursor-pointer">
-      {/* Outer ring */}
-      <div className="absolute inset-0 rounded-full border-4 border-white border-dashed animate-spin-slow"></div>
-      
-      {/* Inner content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center p-3">
-        <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-white mb-0.5 animate-pulse" />
-        <h3 className="text-[10px] sm:text-xs font-black text-white uppercase tracking-wider">
-          Limited
-        </h3>
-        <h3 className="text-xs sm:text-sm font-black text-white uppercase -mt-0.5">
-          Offer!
-        </h3>
-        <div className="mt-0.5 bg-white rounded-full px-2 py-0.5">
-          <p className="text-[10px] sm:text-xs text-purple-700 font-black">
-            50 SLOTS
-          </p>
-        </div>
-        <p className="text-[8px] sm:text-[9px] text-white mt-0.5 font-semibold">
-          {formatTime(timeLeft)}
-        </p>
-      </div>
-      
-      {/* Corner sparkles */}
-      <Star className="absolute top-1 right-1 w-2.5 h-2.5 text-white animate-pulse" />
-      <Star className="absolute bottom-1 left-1 w-2.5 h-2.5 text-white animate-pulse delay-75" />
-    </div>
-  </div>
+
 
   <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4">
-    Our Prices <span className={primaryColor}>From:</span>
+    Our Prices Ranges From -
   </h2>
   <div className="inline-block p-4 sm:p-5 bg-gray-900/70 rounded-xl border border-purple-700 shadow-lg shadow-purple-900/20">
     <p className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white mb-2">
@@ -362,7 +476,7 @@ const LandingPage6 = () => {
 </section>
 
         {/* 4. Testimonial / Social Proof */}
-        <section id="testimonial" className="pt-4 sm:pt-6 pb-4 sm:pb-6">
+        {/* <section id="testimonial" className="pt-4 sm:pt-6 pb-4 sm:pb-6">
           <div className="max-w-7xl mx-auto p-4 sm:p-5 bg-gray-900/50 rounded-xl border-l-2 sm:border-l-3 border-purple-500 shadow-lg shadow-purple-900/50 mx-2">
             <Star className={`w-4 h-4 sm:w-5 sm:h-5 ${primaryColor} mb-2 sm:mb-3`} />
             <blockquote className="text-sm sm:text-base italic text-gray-200 leading-relaxed">
@@ -373,32 +487,51 @@ const LandingPage6 = () => {
               — Michael O., <span className="text-purple-400/80">Logistics Startup Founder</span>
             </p>
           </div>
-        </section>
+        </section> */}
+        <TestimonialSlider />
         
      
 
       </main>
 
       {/* Footer */}
-      <footer className="py-4 bg-gray-900/80 text-center border-t border-purple-900/60 mt-4">
-        <div className="flex justify-center gap-3 sm:gap-4 mb-2">
-          {[
-            { href: "#", path: "M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" },
-            { href: "#", path: "M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" },
-            { href: "#", path: "M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" },
-            { href: "#", path: "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" }
-          ].map((social, index) => (
-            <a key={index} href={social.href} className="text-gray-400 hover:text-purple-400 transition-colors">
-              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d={social.path} />
-              </svg>
-            </a>
-          ))}
-        </div>
-        <p className="text-gray-500 text-xs">
-          &copy; {new Date().getFullYear()} Delacruz Innovations. All Rights Reserved.
-        </p>
-      </footer>
+ {/* Footer */}
+{/* Footer */}
+<footer className="py-4 bg-gray-900/80 text-center border-t border-purple-900/60 mt-4">
+  <div className="flex justify-center gap-3 sm:gap-4 mb-2">
+    {[
+      { 
+        href: "https://web.facebook.com/profile.php?id=61582853766401", 
+        path: "M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" 
+      },
+      { 
+        href: "https://x.com/Delacruz_Inno", 
+        path: "M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" 
+      },
+      { 
+        href: "https://www.instagram.com/delacruzinnovations/", // Replace with your Instagram URL
+        path: "M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
+      },
+      { 
+        href: "https://www.tiktok.com/@delacruzinnovation", // Replace with your TikTok URL
+        path: "M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"
+      },
+     { 
+  href: "#", // Replace with your website URL
+  path: "M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-2 19v-6h-3l4-7 4 7h-3v6h-2zm10-2.5c0 2.485-2.017 4.5-4.5 4.5S11 18.985 11 16.5s2.017-4.5 4.5-4.5 4.5 2.015 4.5 4.5z"
+}
+    ].map((social, index) => (
+      <a key={index} href={social.href} className="text-gray-400 hover:text-purple-400 transition-colors">
+        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d={social.path} />
+        </svg>
+      </a>
+    ))}
+  </div>
+  <p className="text-gray-500 text-xs">
+    &copy; {new Date().getFullYear()} Delacruz Innovations. All Rights Reserved.
+  </p>
+</footer>
 
     </div>
   );
